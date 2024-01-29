@@ -4,8 +4,8 @@ export class GetSuburbUseCase{
     async execute(){
       
         try {
-            const data= await this.repo.getSuburb()
-            return data 
+            const suburbResult= await this.repo.getSuburb()
+            return suburbResult
         } catch (error) {
             console.log(error);
             throw new Error ("Error:No Suburb Found")

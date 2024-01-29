@@ -19,8 +19,8 @@ class UpdateSuburbUseCase {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const params = new SuburbEntities_1.SuburbEntites(suburbParams.name, suburbParams.state, suburbParams.postcode);
-                const data = yield this.repo.updateSuburb(id, params);
-                return data;
+                const suburbResult = yield this.repo.updateSuburb(id, params);
+                return suburbResult;
             }
             catch (error) {
                 console.log(error);

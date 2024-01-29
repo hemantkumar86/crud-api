@@ -17,8 +17,8 @@ class DeleteSuburbByIdUseCase {
     execute(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.repo.deleteSuburbByID(id);
-                return data;
+                const suburbResult = yield this.repo.deleteSuburbByID(id);
+                return suburbResult;
             }
             catch (error) {
                 console.log(error);

@@ -3,8 +3,8 @@ export class GetSuburbByIdUsecase{
     constructor(private repo:SuburbRepo){}
     async execute(id:number){
         try {
-            const data=await this.repo.getSuburbByID(id);
-            return data
+            const suburbResult=await this.repo.getSuburbByID(id);
+            return suburbResult
             
         } catch (error) {
             console.log(error)

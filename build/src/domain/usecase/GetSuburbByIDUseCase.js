@@ -17,8 +17,8 @@ class GetSuburbByIdUsecase {
     execute(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.repo.getSuburbByID(id);
-                return data;
+                const suburbResult = yield this.repo.getSuburbByID(id);
+                return suburbResult;
             }
             catch (error) {
                 console.log(error);

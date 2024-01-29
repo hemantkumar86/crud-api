@@ -7,8 +7,8 @@ export class CreateSuburbUseCase{
     async execute(suburbParams:SuburbDto){
         try {
             const params=new SuburbEntites(suburbParams.name,suburbParams.state,suburbParams.postcode)
-            const data =await this.repo.createSuburb(params)
-            return data
+            const suburbResult =await this.repo.createSuburb(params)
+            return suburbResult
             
         } catch (error) {
             console.log(error);

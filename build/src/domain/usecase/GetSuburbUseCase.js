@@ -17,8 +17,8 @@ class GetSuburbUseCase {
     execute() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.repo.getSuburb();
-                return data;
+                const suburbResult = yield this.repo.getSuburb();
+                return suburbResult;
             }
             catch (error) {
                 console.log(error);

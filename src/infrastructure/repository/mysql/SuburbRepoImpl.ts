@@ -5,43 +5,43 @@ import { SuburbSequelize } from "../sequelize/SequelizeModel";
 
 export class SuburbRepositoryImpl implements SuburbRepo{
   async getSuburb(): Promise<SuburbEntites[]> {
-        let data= await SuburbSequelize.findAll()
-        return SuburbMapper.toDomain(data)
+        let suburbData= await SuburbSequelize.findAll()
+        return SuburbMapper.toDomain(suburbData)
     }
      async createSuburb(suburb: SuburbEntites): Promise<number|string> {
-        let existData= await SuburbSequelize.findAll({where:{postcode:suburb.getPostCode()}})
-        if(existData.length>0){
+        let existSuburb= await SuburbSequelize.findAll({where:{postcode:suburb.getPostCode()}})
+        if(existSuburb.length>0){
             return `Suburb Already Exists`
         }else{
-            const insertData=await SuburbSequelize.create({
+            const insertSuburbData=await SuburbSequelize.create({
                 name:suburb.getName(),
                 state:suburb.getState(),
                 postcode:suburb.getPostCode(),
                 id:suburb.getId()
              })
-             return insertData.dataValues.id
+             return insertSuburbData.dataValues.id
         }
 
         
     }
     async getSuburbByID(id: number): Promise<SuburbEntites | undefined> {
-        const data =await SuburbSequelize.findByPk(id) 
-        if(!data){
+        const suburb =await SuburbSequelize.findByPk(id) 
+        if(!suburb){
             throw new Error("Not Found")
         }else{
-            const mapedData=SuburbMapper.toDomain([data])
+            const mapedData=SuburbMapper.toDomain([suburb])
             return mapedData[0]
         }
     }
 
      async updateSuburb(id:number,suburb: SuburbEntites): Promise<[number]> {
-        const data= await SuburbSequelize.update(suburb,{where:{id:id}}) 
-        return data
+        const result= await SuburbSequelize.update(suburb,{where:{id:id}}) 
+        return result
     }
     async deleteSuburbByID(id: number): Promise<number> {
 
-        const count = await SuburbSequelize.destroy({ where: { id: id} }); 
-        return count
+        const totalSuburbRowDeleted = await SuburbSequelize.destroy({ where: { id: id} }); 
+        return totalSuburbRowDeleted
       }
 
 }

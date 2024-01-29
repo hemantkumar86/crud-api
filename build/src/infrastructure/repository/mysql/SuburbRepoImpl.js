@@ -15,49 +15,49 @@ const SequelizeModel_1 = require("../sequelize/SequelizeModel");
 class SuburbRepositoryImpl {
     getSuburb() {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield SequelizeModel_1.SuburbSequelize.findAll();
-            return SuburbMapper_1.SuburbMapper.toDomain(data);
+            let suburbData = yield SequelizeModel_1.SuburbSequelize.findAll();
+            return SuburbMapper_1.SuburbMapper.toDomain(suburbData);
         });
     }
     createSuburb(suburb) {
         return __awaiter(this, void 0, void 0, function* () {
-            let existData = yield SequelizeModel_1.SuburbSequelize.findAll({ where: { postcode: suburb.getPostCode() } });
-            if (existData.length > 0) {
+            let existSuburb = yield SequelizeModel_1.SuburbSequelize.findAll({ where: { postcode: suburb.getPostCode() } });
+            if (existSuburb.length > 0) {
                 return `Suburb Already Exists`;
             }
             else {
-                const insertData = yield SequelizeModel_1.SuburbSequelize.create({
+                const insertSuburbData = yield SequelizeModel_1.SuburbSequelize.create({
                     name: suburb.getName(),
                     state: suburb.getState(),
                     postcode: suburb.getPostCode(),
                     id: suburb.getId()
                 });
-                return insertData.dataValues.id;
+                return insertSuburbData.dataValues.id;
             }
         });
     }
     getSuburbByID(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield SequelizeModel_1.SuburbSequelize.findByPk(id);
-            if (!data) {
+            const suburb = yield SequelizeModel_1.SuburbSequelize.findByPk(id);
+            if (!suburb) {
                 throw new Error("Not Found");
             }
             else {
-                const mapedData = SuburbMapper_1.SuburbMapper.toDomain([data]);
+                const mapedData = SuburbMapper_1.SuburbMapper.toDomain([suburb]);
                 return mapedData[0];
             }
         });
     }
     updateSuburb(id, suburb) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield SequelizeModel_1.SuburbSequelize.update(suburb, { where: { id: id } });
-            return data;
+            const result = yield SequelizeModel_1.SuburbSequelize.update(suburb, { where: { id: id } });
+            return result;
         });
     }
     deleteSuburbByID(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const count = yield SequelizeModel_1.SuburbSequelize.destroy({ where: { id: id } });
-            return count;
+            const totalSuburbRowDeleted = yield SequelizeModel_1.SuburbSequelize.destroy({ where: { id: id } });
+            return totalSuburbRowDeleted;
         });
     }
 }

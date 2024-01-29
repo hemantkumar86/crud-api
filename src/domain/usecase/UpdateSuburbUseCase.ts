@@ -7,8 +7,8 @@ export class UpdateSuburbUseCase{
     async execute(id:number,suburbParams:SuburbDto){
      try {
         const params=new SuburbEntites(suburbParams.name,suburbParams.state,suburbParams.postcode)
-        const data=await this.repo.updateSuburb(id,params)
-        return data
+        const suburbResult=await this.repo.updateSuburb(id,params)
+        return suburbResult
      } catch (error) {
         console.log(error)
         throw new Error("Error in Update")
